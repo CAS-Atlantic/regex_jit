@@ -1,0 +1,55 @@
+# Compiles to Boyer-Moore w/memchr
+Gutenberg
+
+# Uses memchr(2|3)
+(?i)Gutenberg
+
+# Aho-Corasick w/ memchr
+Gutenberg|Good
+
+# No match
+\bzero matches\b
+
+# frequent
+and
+
+# Everything greedy
+.*
+
+# Everything includes newlines
+(?s).*
+
+
+# Every letter
+\p{L}
+
+# Kill prefix opts ly suffix
+[a-zA-Z]+ly
+
+Kill suffix opts
+Project\w+
+
+Kill prefix & suffix opts
+\w+Project\w+
+
+# Emails
+# We begin by telling the parser to find the beginning of the string (^). 
+# Inside the first group, we match one or more lowercase letters, numbers, 
+# underscores, dots, or hyphens. I have escaped the dot because a non-escaped 
+# dot means any character. Directly after that, there must be an at sign. Next 
+# is the domain name which must be: one or more lowercase letters, numbers, 
+# underscores, dots, or hyphens. Then another (escaped) dot, with the extension 
+# being two to six letters or dots. I have 2 to 6 because of the country 
+# specific TLD's (.ny.us or .co.uk). Finally, we want the end of the string ($)
+^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,5})$
+
+# North American Phone Numbers
+# This regex will validate a 10-digit North American telephone number. 
+# Separators are not required, but can include spaces, hyphens, or periods. 
+# Parentheses around the area code are also optional.
+
+^(([0-9]{1})*[- .(]*([0-9]{3})[- .)]*[0-9]{3}[- .]*[0-9]{4})+$
+
+
+# Every country, lots of alternation Aho-Chorasick
+Afghanistan|Albania|Algeria|Andorra|Angola|Antigua & Barbuda|Argentina|Armenia|Australia|Austria|Azerbaijan|Bahamas|Bahrain|Bangladesh|Barbados|Belarus|Belgium|Belize|Benin|Bhutan|Bolivia|Bosnia Herzegovina|Botswana|Brazil|Brunei|Bulgaria|Burkina|Burundi|Cambodia|Cameroon|Canada|Cape Verde|Central African Rep|Chad|Chile|China|Colombia|Comoros|Congo|Congo|Costa Rica|Croatia|Cuba|Cyprus|Czech Republic|Denmark|Djibouti|Dominica|Dominican Republic|East Timor|Ecuador|Egypt|El Salvador|Equatorial Guinea|Eritrea|Estonia|Ethiopia|Fiji|Finland|France|Gabon|Gambia|Georgia|Germany|Ghana|Greece|Grenada|Guatemala|Guinea|Guinea-Bissau|Guyana|Haiti|Honduras|Hungary|Iceland|India|Indonesia|Iran|Iraq|Ireland|Israel|Italy|Ivory Coast|Jamaica|Japan|Jordan|Kazakhstan|Kenya|Kiribati|North Korea|South Korea|Kosovo|Kuwait|Kyrgyzstan|Laos|Latvia|Lebanon|Lesotho|Liberia|Libya|Liechtenstein|Lithuania|Luxembourg|Macedonia|Madagascar|Malawi|Malaysia|Maldives|Mali|Malta|Marshall Islands|Mauritania|Mauritius|Mexico|Micronesia|Moldova|Monaco|Mongolia|Montenegro|Morocco|Mozambique|Myanmar|Namibia|Nauru|Nepal|Netherlands|New Zealand|Nicaragua|Niger|Nigeria|Norway|Oman|Pakistan|Palau|Panama|Papua New Guinea|Paraguay|Peru|Philippines|Poland|Portugal|Qatar|Romania|Russian Federation|Rwanda|St Kitts & Nevis|St Lucia|Saint Vincent & the Grenadines|Samoa|San Marino|Sao Tome & Principe|Saudi Arabia|Senegal|Serbia|Seychelles|Sierra Leone|Singapore|Slovakia|Slovenia|Solomon Islands|Somalia|South Africa|South Sudan|Spain|Sri Lanka|Sudan|Suriname|Swaziland|Sweden|Switzerland|Syria|Taiwan|Tajikistan|Tanzania|Thailand|Togo|Tonga|Trinidad & Tobago|Tunisia|Turkey|Turkmenistan|Tuvalu|Uganda|Ukraine|United Arab Emirates|United Kingdom|United States|Uruguay|Uzbekistan|Vanuatu|Vatican City|Venezuela|Vietnam|Yemen|Zambia|Zimbabwe
